@@ -7,6 +7,7 @@ using System.Text;
 namespace NodeBlock.Plugin.Avalanche.Nodes.SnowTrace
 {
     [NodeDefinition("SnowTraceConnectorNode", "SnowTrace Connector", NodeTypeEnum.Connector, "Avalanche.SnowTrace")]
+    [NodeSpecialActionAttribute("Go to SnowTrade API Portal", "open_url", "https://snowtrace.io/apis")]
     [NodeGraphDescription("Connection to the SnowTrace API")]
     public class SnowTraceConnectorNode : Node
     {
