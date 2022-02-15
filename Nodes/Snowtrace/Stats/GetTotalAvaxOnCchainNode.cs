@@ -11,7 +11,6 @@ namespace NodeBlock.Plugin.Avalanche.Nodes.SnowTrace.Stats
 {
     [NodeDefinition("GetTotalAvaxOnCchainNode", "Get Total AVAX on C-Chain", NodeTypeEnum.Function, "Avalanche.SnowTrace")]
     [NodeGraphDescription("Get Total Supply of AVAX on the Avalanche C-Chain")]
-    [NodeIDEParameters(Hidden = true)] // Endpoint broken on SnowTrace
 
     public class GetTotalAvaxOnCchainNode : Node
     {
@@ -39,7 +38,7 @@ namespace NodeBlock.Plugin.Avalanche.Nodes.SnowTrace.Stats
         public override bool OnExecution()
         {
             var apiKey = (this.InParameters["snowtraceConnection"].GetValue() as SnowTraceConnectorNode).InParameters["apiKey"].GetValue();
-            var response = client.GetAsync("https://api.snowtrace.io/api?module=stats&action=AVAXsupply&apikey=" + apiKey).Result;
+            var response = client.GetAsync("https://api.snowtrace.io/api?module=stats&action=ethsupply&apikey=" + apiKey).Result;
             var avaxTotalSupplyResponse = JsonConvert.DeserializeObject<GetTotalAvaxOnCchainHttpResult>(response.Content.ReadAsStringAsync().Result);
 
             this.OutParameters["totalSupply"].SetValue(avaxTotalSupplyResponse.result);

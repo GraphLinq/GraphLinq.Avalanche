@@ -23,7 +23,7 @@ namespace NodeBlock.Plugin.Avalanche.Nodes.SnowTrace.Tokens
         private readonly HttpClient client = new HttpClient();
 
         public GetTokenBalanceForContractNode(string id, BlockGraph graph)
-           : base(id, graph, typeof(GetTokenSupplyByContractNode).Name)
+           : base(id, graph, typeof(GetTokenBalanceForContractNode).Name)
         {
             this.InParameters.Add("snowtraceConnection", new NodeParameter(this, "snowtraceConnection", typeof(SnowTraceConnectorNode), true));
             this.InParameters.Add("contractAddress", new NodeParameter(this, "contractAddress", typeof(string), true));
