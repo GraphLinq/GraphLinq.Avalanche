@@ -1,0 +1,479 @@
+# Exposes a URL that specifies the behaviour of this scalar.
+directive @specifiedBy(
+  # The URL that specifies the behaviour of this scalar.
+  url: String!
+) on SCALAR
+type AddressesResponse {
+  count: Float!
+  results: [AddressUnion!]!
+}
+
+union AddressUnion = XAddress | CAddress
+type AssetsResponse {
+  count: Float!
+  results: [AssetUnion!]!
+}
+
+union AssetUnion = XAsset | CAsset
+type Beneficiary {
+  locktime: Float
+  threshold: Float
+  addresses: [String!]!
+}
+
+type Blockchain {
+  id: ID!
+  name: String!
+  subnet: String!
+  vmID: String!
+}
+
+type BlockchainsResponse {
+  count: Float!
+  results: [Blockchain!]!
+}
+
+type BlocksResponse {
+  count: Float!
+  results: [BlockUnion!]!
+}
+
+union BlockUnion = CBlock
+type CAddress {
+  id: ID!
+  type: String!
+  balanceCAssetsDetails: [CBalanceAssetDetails!]!
+}
+
+type CAsset {
+  id: ID!
+  chainID: String!
+  denomination: Int!
+  type: String!
+  symbol: String
+  currentSupply: Float
+  name: String
+  tokenType: String
+}
+
+type CBalanceAssetDetails {
+  asset: CAsset!
+  balance: Float!
+}
+
+type CBlock {
+  id: ID!
+  type: String
+  timestamp: DateTime!
+  number: Float!
+  parentHash: String!
+  nonce: String!
+  sha3Uncles: String!
+  logsBloom: String!
+  transactionsRoot: String!
+  stateRoot: String!
+  receiptsRoot: String!
+  size: Float!
+  extraData: String!
+  gasLimit: Float!
+  gasUsed: Float!
+  transactionCount: Float!
+}
+
+type Credential {
+  address: String!
+  publicKey: String
+  signature: String!
+}
+
+type CTokenTransfer {
+  transactionId: String!
+  logIndex: Float
+  tokenAddress: String
+  fromAddress: String!
+  toAddress: String
+  value: String!
+}
+
+type CTransaction {
+  id: ID!
+  chainID: String!
+  type: String!
+  bytes: String
+  acceptedAt: DateTime!
+  nonce: Float!
+  transactionIndex: String!
+  fromAddress: String!
+  toAddress: String
+  value: Float!
+  gas: Float!
+  gasPrice: Float!
+  input: String!
+  receiptCumulativeGasUsed: Float!
+  receiptGasUsed: Float!
+  receiptContractAddress: String
+  receiptRoot: String
+  receiptStatus: String!
+  blockNumber: Float!
+  blockHash: String!
+  tokenTransfers: [CTokenTransfer!]
+  isContractCreation: Boolean!
+}
+
+# The javascript `Date` as string. Type represents date and time as the ISO Date string.
+scalar DateTime
+
+type MetaValidator {
+  alias: String
+  manager: String
+  url: String
+  icon: String
+}
+
+type NonDefaultValidatorInfo {
+  weight: Float!
+  startTime: DateTime!
+  endTime: DateTime!
+  subnet: String!
+  status: String!
+  delegatedWeights: Float!
+  delegations: Float!
+}
+
+# Order by scalar type
+
+scalar OrderBy
+
+type OutputsResponse {
+  count: Float!
+  results: [OutputUnion!]!
+}
+
+union OutputUnion = XOutput
+type PAddDefaultSubnetDelegator {
+  id: ID!
+  chainID: String!
+  type: String!
+  bytes: String
+  acceptedAt: DateTime!
+  weight: Float!
+  from: String
+  nodeID: String!
+  beneficiary: Beneficiary
+  potentialReward: Float
+  startTime: DateTime!
+  endTime: DateTime!
+  subnet: String!
+}
+
+type PAddDefaultSubnetValidator {
+  id: ID!
+  chainID: String!
+  type: String!
+  bytes: String
+  acceptedAt: DateTime!
+  weight: Float!
+  from: String
+  nodeID: String!
+  beneficiary: Beneficiary
+  delegationFeeRate: Float
+  potentialReward: Float
+  startTime: DateTime!
+  endTime: DateTime!
+}
+
+type PAddNonDefaultSubnetValidator {
+  id: ID!
+  chainID: String!
+  type: String!
+  bytes: String
+  acceptedAt: DateTime!
+  weight: Float!
+  from: String
+  nodeID: String!
+  delegationFeeRate: Float
+  startTime: DateTime!
+  endTime: DateTime!
+  subnet: String!
+}
+
+type Query {
+  transactions(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    id: String
+    chainID: String = "jnUjZSRt16TcRnZzmh5aMhavwVHz3zBrSN8GfFMTQkzUnoBxC"
+    status: String
+    type: String
+    assetID: String
+    subnet: String
+    nodeID: String
+    beneficiary: String
+    address: String
+    onlyCContractCreation: Boolean = false
+    byBlockNumber: Float
+  ): TransactionsResponse!
+  outputs(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    id: String
+    address: String
+  ): OutputsResponse!
+  subnets(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    id: String
+  ): SubnetsResponse!
+  blockchains(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    id: String
+    subnet: String
+  ): BlockchainsResponse!
+  validators(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    id: String
+    status: String = "active"
+    subnet: String = "11111111111111111111111111111111LpoYY"
+  ): ValidatorsResponse!
+  assets(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    id: String
+    chainID: String = "jnUjZSRt16TcRnZzmh5aMhavwVHz3zBrSN8GfFMTQkzUnoBxC"
+  ): AssetsResponse!
+  addresses(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    id: String
+    chainID: String = "jnUjZSRt16TcRnZzmh5aMhavwVHz3zBrSN8GfFMTQkzUnoBxC"
+  ): AddressesResponse!
+  transactionDataPoints(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    startTime: DateTime!
+    endTime: DateTime!
+    interval: String = "1h"
+  ): TransactionDataPointsResponse!
+  search(offset: Int = 0, limit: Int = 20, query: String!): SearchResponse!
+  blocks(
+    orderBy: OrderBy
+    offset: Int = 0
+    limit: Int = 20
+    id: String
+    chainID: String = "saMG5YgNsFxzjz4NMkEkt3bAH6hVxWdZkWcEnGB3Z15pcAmsK"
+  ): BlocksResponse!
+  stats: Stats!
+}
+
+type SearchResponse {
+  count: Float!
+  results: [SearchResultUnion!]!
+}
+
+union SearchResultUnion =
+    XBaseTransaction
+  | XCreateAssetTransaction
+  | XExportTransaction
+  | XAsset
+  | Validator
+  | XAddress
+  | XImportTransaction
+type Stats {
+  priceAvaxUsd: Float
+  connectedNodes: Float
+}
+
+type Subnet {
+  id: ID!
+  activeValidationWeight: Float!
+  pendingValidationWeight: Float!
+  activeDelegatedWeight: Float!
+  pendingDelegatedWeight: Float!
+  activeValidatorCount: Float!
+  pendingValidatorCount: Float!
+  activeDelegationCount: Float!
+  pendingDelegationCount: Float!
+  controlKeys: [String!]!
+  threshold: Float!
+  blockchainCount: Int
+}
+
+type SubnetsResponse {
+  count: Float!
+  results: [Subnet!]!
+}
+
+type TransactionDataPoint {
+  startTime: DateTime!
+  endTime: DateTime!
+  transactionVolume: Float!
+  transactionCount: Float!
+  addressCount: Float!
+  outputCount: Float!
+  assetCount: Float!
+}
+
+type TransactionDataPointsResponse {
+  count: Float!
+  startTime: DateTime!
+  endTime: DateTime!
+  transactionVolume: Float!
+  transactionCount: Float!
+  addressCount: Float!
+  outputCount: Float!
+  assetCount: Float!
+  results: [TransactionDataPoint!]!
+}
+
+type TransactionsResponse {
+  count: Float!
+  countLatest24h: Float
+  results: [TransactionUnion!]!
+}
+
+union TransactionUnion =
+    XBaseTransaction
+  | XCreateAssetTransaction
+  | XExportTransaction
+  | XImportTransaction
+  | PAddDefaultSubnetValidator
+  | PAddDefaultSubnetDelegator
+  | PAddNonDefaultSubnetValidator
+  | CTransaction
+type UptimeDetails {
+  nodeID: String!
+  uptime: Float!
+  weight: Float!
+  totalWeight: Float!
+}
+
+type Validator {
+  id: ID!
+  weight: Float!
+  beneficiary: Beneficiary
+  startTime: DateTime!
+  endTime: DateTime!
+  subnet: String!
+  status: String!
+  delegatedWeights: Float!
+  uptime: Float
+  uptimeDetails: [UptimeDetails!]
+  connected: Boolean!
+  delegationFee: Float
+  potentialReward: Float
+  delegations: Float!
+  totalWeight: Float!
+  capacity: Float
+  subnets: [NonDefaultValidatorInfo!]!
+  meta: MetaValidator!
+  maxYield: Float
+}
+
+type ValidatorsResponse {
+  count: Float!
+  results: [Validator!]!
+}
+
+type XAddress {
+  id: ID!
+  type: String!
+  publicKey: String
+  balanceAssetsDetails: [XBalanceAssetDetails!]
+}
+
+type XAsset {
+  id: ID!
+  chainID: String!
+  denomination: Int!
+  type: String!
+  symbol: String
+  currentSupply: Float
+  name: String
+  alias: String!
+  acceptedAt: DateTime!
+  icon: String
+}
+
+type XBalanceAssetDetails {
+  asset: XAsset!
+  balance: Float!
+  transactionCount: Float!
+  utxoCount: Float!
+  totalReceived: Float!
+  totalSent: Float!
+}
+
+type XBaseTransaction {
+  id: ID!
+  chainID: String!
+  type: String!
+  bytes: String
+  acceptedAt: DateTime!
+  inputs: [XInput!]!
+  outputs: [XOutput!]!
+  memo: String
+}
+
+type XCreateAssetTransaction {
+  id: ID!
+  chainID: String!
+  type: String!
+  bytes: String
+  acceptedAt: DateTime!
+  inputs: [XInput!]!
+  outputs: [XOutput!]!
+  memo: String
+}
+
+type XExportTransaction {
+  id: ID!
+  chainID: String!
+  type: String!
+  bytes: String
+  acceptedAt: DateTime!
+  inputs: [XInput!]!
+  outputs: [XOutput!]!
+  memo: String
+}
+
+type XImportTransaction {
+  id: ID!
+  chainID: String!
+  type: String!
+  bytes: String
+  acceptedAt: DateTime!
+  inputs: [XInput!]!
+  outputs: [XOutput!]!
+  memo: String
+  imported: Float
+}
+
+type XInput {
+  output: XOutput!
+  credentials: [Credential!]
+}
+
+type XOutput {
+  id: ID!
+  transactionID: String!
+  outputIndex: Float!
+  assetID: String!
+  outputType: Float!
+  amount: String!
+  locktime: Float!
+  threshold: Float!
+  addresses: [String!]!
+  redeemingTransactionID: String!
+  type: String
+}
+
