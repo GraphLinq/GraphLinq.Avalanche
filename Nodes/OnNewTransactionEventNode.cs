@@ -60,7 +60,7 @@ namespace NodeBlock.Plugin.Avalanche.Nodes
         {
             StreamingEventArgs<string> eventData = e;
             if (eventData.Response == null) return;
-            var instanciatedParameters = this.InstanciateParametersForCycle();
+            var instanciatedParameters = this.InstanciatedParametersForCycle();
             instanciatedParameters["transactionHash"].SetValue(eventData.Response);
 
             this.Graph.AddCycle(this, instanciatedParameters);

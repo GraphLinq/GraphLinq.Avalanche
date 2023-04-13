@@ -11,7 +11,7 @@ using System.Text;
 namespace NodeBlock.Plugin.Avalanche.Nodes
 {
     [NodeDefinition("OnNewAvaxBlockEventNode", "On Avalanche Block", NodeTypeEnum.Event, "Blockchain.Avalanche")]
-    [NodeGraphDescription("Event that occurs everytime a new avalanche block is minted")]
+    [NodeGraphDescription("Event that occurs every time a new avalanche block is minted")]
     public class OnNewAvaxBlockEventNode : Node, IEventEthereumNode
     {
         private EthNewBlockHeadersObservableSubscription blockHeadersSubscription;
@@ -43,7 +43,7 @@ namespace NodeBlock.Plugin.Avalanche.Nodes
                 this.blockHeadersSubscription = new EthNewBlockHeadersObservableSubscription(avaxConnection.SocketClient);
                 blockHeadersSubscription.GetSubscriptionDataResponsesAsObservable().Subscribe(async Block =>
                 {
-                    var instanciatedParameters = this.InstanciateParametersForCycle();
+                    var instanciatedParameters = this.InstanciatedParametersForCycle();
                     instanciatedParameters["block"].SetValue(Block);
 
                     this.Graph.AddCycle(this, instanciatedParameters);
@@ -72,7 +72,7 @@ namespace NodeBlock.Plugin.Avalanche.Nodes
 
         public void OnEventNode(object sender, dynamic e)
         {
-            var instanciatedParameters = this.InstanciateParametersForCycle();
+            var instanciatedParameters = this.InstanciatedParametersForCycle();
             instanciatedParameters["block"].SetValue(e);
 
             this.Graph.AddCycle(this, instanciatedParameters);
