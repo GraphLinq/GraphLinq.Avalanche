@@ -1,171 +1,129 @@
-# GraphLinq.Avalanche
+<!--
+*** This README used the Best-README-Template (https://github.com/othneildrew/Best-README-Template).
+-->
 
-Plugin of the GraphLinq Engine communicating with the Avalanche Network
+<a name="readme-top"></a>
 
-# Basic Blocks
+<!-- PROJECT SHIELDS -->
 
-Basic blocks for interacting with the Avalanche Network
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
-## Avalanche Connector
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/GraphLinq/GraphLinq.Avalanche">
+    <img src="img/project-logo-full.png" alt="Logo" width="830">
+  </a>
 
-For API and WebSocket connections we recommend using [Moralis](https://moralis.io/) or any other provider that supports API/WSS connections.
+  <h3 align="center">GraphLinq.Avalanche</h3>
 
-- Input
-  - Url
-  - Socket Url
-- Output
-  - Connection
+  <p align="center">
+    Plugin of the GraphLinq Engine communicating with the Avalanche blockchain.
+    <br />
+    <a target="_blank" href="https://docs.graphlinq.io"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/GraphLinq/GraphLinq.Avalanche/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/GraphLinq/GraphLinq.Avalanche/issues">Request Feature</a>
+  </p>
+</div>
 
-### On Avalanche Block (Event)
 
-Event triggered on each new block.
 
-- Input
+<!-- TABLE OF CONTENTS -->
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+This plugin allows the GraphLinq Engine to connect to the Avalanche blockchain.
+
+List of Blocks:
+
+- Avalanche Block Details
   - Avalanche Connector
-- Output
-  - Block
-
-### Get Block Parameters
-
-Converts a block into output parameters
-
-- Input
-  - Block
-- Output
-  - Gas Used
-  - Gas Limit
-  - Block Hash
-
-### On Avalanche Transaction (Event)
-
-Event triggered on each transaction.
-
-- Input
-  - Avalanche Connector
-- Output
-  - Transaction Hash
-
-### Get Transaction Parameters
-
-Converts a transaction into output parameters
-
-- Input
-  - Transaction
-- Output
-  - Value
-  - From
-  - To
-  - Gas Price
-  - Gas
-  - Hash
-  - Block Hash
-  - Block Number
-  - Nonce
-
-# SnowTrace Blocks
-
-Blocks for [SnowTrace](https://snowtrace.io/), an Avalanche C-Chain Explorer.
-
-## Connector
-
-**SnowTrace Connector** - [SnowTrace API](https://snowtrace.io/apis)
-
-- Input
-  - API Key
-- Output
-  - SnowTrace Connection
-
-## Accounts
-
-**Get AVAX Balance Single Address**
-
-- Input
-  - SnowTrace Connection
-  - Wallet Address
-- Output
-  - Wallet Balance
-
-## Stats
-
-- Input
+  - On Avalanche Block (Event)
+  - Get Block Parameters
+  - On Avalanche Transaction (Event)
+  - Get Transaction Parameters
+- SnowTrace Block Details
   - SnowTrace Connector
-- Output
-  - Total Supply
+  - Accounts
+  - Stats
+  - Tokens
+- Avascan Block Details
+  - Burn
+  - Stats
+  - Supply
 
-## Tokens
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Get ERC-20 Balance For Contract**
+### Built With
 
-- Input
-  - SnowTrace Connector
-  - Contract Address
-  - Token Address
-- Output
-  - Account Balance
+C# .NET Core 3.1
 
-**Get ERC-20 Token Supply**
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- Input
-  - SnowTrace Connector
-  - Contract Address
-- Output
-  - Total Supply
+<!-- CONTRIBUTING -->
+## Contributing
 
-# Avascan
+If you have a suggestion that would make this repository better, please fork the repo and create a pull request. You can also simply open an issue. Don't forget to give the project a star! Thanks again!
 
-Blocks for [Avascan.info](https://avascan.info/)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Avascan does not require an API Key so there isn't a Connector Block. These blocks have no inputs and return the latest results.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Burn
+<!-- CONTACT -->
+## Contact
 
-**Get Burned Fees**
+GraphLinq Protocol - [@graphlinq_proto](https://twitter.com/graphlinq_proto)
 
-- Output
-  - X
-  - C
-  - Xc
+Project Home: [https://graphlinq.io](https://graphlinq.io)
 
-## Stats
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Get Global Stats**
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
 
-- Output
-  - Blockchains
-  - Validators
-  - Staking Ratio
-  - Staking Rewards
-  - Price
-  - Market Cap By Circulating Supply
-  - Market Cap By Total Supply
-  - Circulating Supply
-  - Last Transactions 24hrs
-  - Last Average TPS 24hrs
-  - Assets and Tokens
-  - Burned Since Launch
+<a href="https://github.com/GraphLinq/GraphLinq.Avalanche/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=GraphLinq/GraphLinq.Avalanche" />
+</a>
 
-**Get Staking Stats**
+Made with [contributors-img](https://contrib.rocks).
 
-- Output
-  - Total Validator
-  - Total Delegation
-  - Total Stake
-  - Total Validation Stake
-  - Total Delegated Stake
-  - Staking Reward
-  - Staking Ratio
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Supply
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-**Get Supply**
-
-- Output
-  - Genesis Unlock
-  - Staking Rewards
-  - Last Update
-  - Circulating Supply
-  - Total Supply
-
-## GraphQL
-
-Not Implemented. Please see [Nodes/Avascan/.graphql](https://github.com/GraphLinq/GraphLinq.Avalanche/tree/main/Nodes/Avascan/.graphql) for a full list of possibilities. Will add these upon request.
+<!-- GitHub -->
+[contributors-shield]: https://img.shields.io/github/contributors/GraphLinq/GraphLinq.Avalanche.svg?style=for-the-badge
+[contributors-url]: https://github.com/GraphLinq/GraphLinq.Avalanche/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/GraphLinq/GraphLinq.Avalanche.svg?style=for-the-badge
+[forks-url]: https://github.com/GraphLinq/GraphLinq.Avalanche/network/members
+[stars-shield]: https://img.shields.io/github/stars/GraphLinq/GraphLinq.Avalanche.svg?style=for-the-badge
+[stars-url]: https://github.com/GraphLinq/GraphLinq.Avalanche/stargazers
+[issues-shield]: https://img.shields.io/github/issues/GraphLinq/GraphLinq.Avalanche.svg?style=for-the-badge
+[issues-url]: https://github.com/GraphLinq/GraphLinq.Avalanche/issues
